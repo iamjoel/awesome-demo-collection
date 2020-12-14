@@ -1,0 +1,25 @@
+{
+  "name": "awesome-demo-collection",
+  "version": "1.0.0",
+  "description": "了不起的代码集",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamjoel/awesome-demo-collection.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MI5",
+  "bugs": {
+    "url": "https://github.com/iamjoel/awesome-demo-collection/issues"
+  },
+  "homepage": "https://github.com/iamjoel/awesome-demo-collection#readme",
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "1.7.1",
+    "vuepress": "1.7.1"
+  }
+}
