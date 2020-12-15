@@ -1,6 +1,3 @@
-// 支持 ESModule
-// https://jestjs.io/docs/en/ecmascript-modules
-// https://stackoverflow.com/questions/35756479/does-jest-support-es6-import-export
 import { genRandomNum } from './guess.js'
 import {MIN, MAX} from '../config.js'
 
