@@ -21,7 +21,7 @@ module.exports = {
         children: [
           {
             title: '猜数字游戏',
-            path: '/content/guess'
+            path: '/content/guess-num'
           }
         ]
       },
