@@ -1,4 +1,4 @@
-import { genRandomNum } from './guess.js'
+import { genRandomNum } from './user-guess.js'
 import {MIN, MAX} from '../config.js'
 
 describe('genRandomNum', () => {

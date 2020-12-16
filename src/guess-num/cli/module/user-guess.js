@@ -44,6 +44,7 @@ async function ask(targetNum) {
     max,
   })
   if(isGuessed) {
+    // 中文不显示
     figlet('Congratulations! 猜对拉', (err, data) => {
       console.log(chalk.green('恭喜猜对拉~'))
       if(err) {
