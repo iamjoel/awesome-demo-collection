@@ -1,11 +1,11 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
-
+import {isValidNum} from '../utils'
 import {MIN, MAX} from '../config.js'
 let min = MIN
 let max = MAX
 
-const CHECK_RES_TYPE = {
+export const CHECK_RES_TYPE = {
   SMALL: 'small',
   BIG: 'big',
   CORRECT: 'correct'
@@ -23,7 +23,7 @@ async function getNum() {
       name: 'targetNum',
       message: '输入要猜的数字',
       validate(value) {
-        return value === '' ? '不能为空' : true
+        return isValidNum(value, MIN, MAX)
       }
     }
   ])
@@ -55,7 +55,7 @@ async function ask(targetNum) {
       ]
     }
   ])
-  
+
   if(expectCheckRes !== userCheckRes) {
     console.log(chalk.red('选错了'))
     ask(targetNum)

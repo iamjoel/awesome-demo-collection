@@ -1,9 +1,8 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
 import figlet from 'figlet'
-
+import {check, isValidNum} from '../utils.js'
 import {MIN, MAX} from '../config.js'
-import {check} from '../utils.js'
 let min = MIN
 let max = MAX
 
@@ -25,14 +24,7 @@ async function ask(targetNum) {
       name: 'guessNum',
       message: `请输入你猜的数字(${min} - ${max})`,
       validate(value) {
-        if(value === '') {
-          return '输入值不能为空'
-        } else if(!/^\d*$/.test(value)) {
-          return '输入值不是合法的整数'
-        } else if(value < min || value > max) {
-          return `输入值必须在 ${min} 和 ${max} 之间`
-        }
-        return true
+        return isValidNum(value, min, max)
       }
     }
   ])
