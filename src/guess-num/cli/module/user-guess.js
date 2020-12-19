@@ -8,7 +8,6 @@ let max = MAX
 
 function guess() {
   const targeNum = genRandomNum()
-  // console.log(targeNum)
   ask(targeNum)
 }
 
@@ -17,7 +16,6 @@ export function genRandomNum() {
 }
 
 async function ask(targetNum) {
-  // TODO: mock inquirer.prompt
   let { guessNum } = await inquirer.prompt([
     {
       type: 'input',

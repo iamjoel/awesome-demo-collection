@@ -16,7 +16,7 @@ async function question() {
   ask(targetNum)
 }
 
-async function getNum() {
+export async function getNum() {
   const {targetNum } = await inquirer.prompt([
     {
       type: 'input',
@@ -30,7 +30,7 @@ async function getNum() {
   return targetNum
 }
 
-async function ask(targetNum) {
+export async function ask(targetNum) {
   const guessNum = genGuessNum(min, max)
   const expectCheckRes = getExpectCheckRes(guessNum, targetNum)
 
@@ -64,7 +64,7 @@ async function ask(targetNum) {
 
   if(expectCheckRes === CHECK_RES_TYPE.CORRECT) {
     console.log(chalk.green('我猜对喽~'))
-    return
+    return true
   } else {
     if(guessNum > targetNum) {
       max = guessNum
