@@ -1,9 +1,7 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
-import {isValidNum} from '../utils'
+import {isValidNum} from '../utils.js'
 import {MIN, MAX} from '../config.js'
-let min = MIN
-let max = MAX
 
 export const CHECK_RES_TYPE = {
   SMALL: 'small',
@@ -11,9 +9,18 @@ export const CHECK_RES_TYPE = {
   CORRECT: 'correct'
 }
 
-async function question() {
-  const targetNum = await getNum()
-  ask(targetNum)
+async function main(number) {
+  const targetNum = number || await getNum()
+  let isGuessed = false
+  let min = MIN
+  let max = MAX
+  while(!isGuessed) {
+    const res = await guess(targetNum, min, max)
+    isGuessed = res.isGuessed
+    min = res.min
+    max = res.max
+  }
+  return true
 }
 
 export async function getNum() {
@@ -30,10 +37,26 @@ export async function getNum() {
   return targetNum
 }
 
-export async function ask(targetNum) {
+export async function guess(targetNum, min, max) {
   const guessNum = genGuessNum(min, max)
   const expectCheckRes = getExpectCheckRes(guessNum, targetNum)
 
+  await checkUserChoose(expectCheckRes, guessNum)
+
+  if(expectCheckRes === CHECK_RES_TYPE.CORRECT) {
+    console.log(chalk.green('我猜对喽~'))
+    return {isGuessed: true}
+  } else {
+    if(guessNum > targetNum) {
+      max = guessNum
+    } else {
+      min = guessNum
+    }
+    return {isGuessed: false, min, max}
+  }
+}
+
+export async function checkUserChoose(expect, guessNum) {
   const { userCheckRes } = await inquirer.prompt([
     {
       type: 'list',
@@ -55,24 +78,11 @@ export async function ask(targetNum) {
       ]
     }
   ])
-
-  if(expectCheckRes !== userCheckRes) {
+  if(userCheckRes !== expect) {
     console.log(chalk.red('选错了'))
-    ask(targetNum)
-    return
+    await checkUserChoose(expect, guessNum)
   }
-
-  if(expectCheckRes === CHECK_RES_TYPE.CORRECT) {
-    console.log(chalk.green('我猜对喽~'))
-    return true
-  } else {
-    if(guessNum > targetNum) {
-      max = guessNum
-    } else {
-      min = guessNum
-    }
-    ask(targetNum)
-  }
+  return true
 }
 
 export function getExpectCheckRes(guessNum, targetNum) {
@@ -95,4 +105,4 @@ export function genGuessNum(min, max) {
   return guessNum
 }
 
-export default question
+export default main

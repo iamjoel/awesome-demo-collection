@@ -1,21 +1,32 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
-import figlet from 'figlet'
 import {check, isValidNum} from '../utils.js'
 import {MIN, MAX} from '../config.js'
-let min = MIN
-let max = MAX
 
-function guess() {
-  const targeNum = genRandomNum()
-  ask(targeNum)
+async function main(num) {
+  const targeNum = num || genRandomNum()
+  let isGuessed = false
+  let min = MIN
+  let max = MAX
+  while (!isGuessed) {
+    let res = await guess(targeNum, min, max)
+    isGuessed = res.isGuessed
+    min = res.min
+    max = res.max
+    if(isGuessed) {
+      console.log(chalk.green('恭喜猜对拉~'))
+    } else {
+      console.log(chalk.yellow(res.msg))
+    }
+  }
+  return true
 }
 
 export function genRandomNum() {
   return Math.round(Math.random() * MAX)
 }
 
-async function ask(targetNum) {
+export async function guess(targetNum, min, max) {
   let { guessNum } = await inquirer.prompt([
     {
       type: 'input',
@@ -27,30 +38,13 @@ async function ask(targetNum) {
     }
   ])
   guessNum = parseInt(guessNum, 10)
-  let {isGuessed, isError, ...rest} = check({
+  let res = check({
     targetNum,
     guessNum,
     min,
     max,
   })
-  if(isGuessed) {
-    // 中文不显示
-    figlet('Congratulations! 猜对拉', (err, data) => {
-      console.log(chalk.green('恭喜猜对拉~'))
-      if(err) {
-        return
-      }
-      console.log(chalk.green(data))
-    })
-    return
-  } else {
-      min = rest.min
-      max = rest.max
-      console.log(rest.msg)
-      await ask(targetNum)
-  }
+  return res
 }
 
-
-
-export default guess
+export default main

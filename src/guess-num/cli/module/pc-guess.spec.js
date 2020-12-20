@@ -1,7 +1,15 @@
 import inquirer from 'inquirer'
 const promptPrompt = inquirer.prompt
+import guessMain, {getNum, guess, genGuessNum, getExpectCheckRes, CHECK_RES_TYPE} from './pc-guess.js'
 
-import {getNum, ask, genGuessNum, getExpectCheckRes, CHECK_RES_TYPE} from './pc-guess.js'
+describe('main', () => {
+  test('should main return true if guessed', async () => {
+    inquirer.prompt = () => Promise.resolve({userCheckRes: CHECK_RES_TYPE.CORRECT})
+    const res = await guessMain(50)
+    expect(res).toBe(true)
+    inquirer.prompt = promptPrompt
+  })
+})
 
 describe('getNum', () => {
   test('should return num if num is valid', async () => {
@@ -12,11 +20,22 @@ describe('getNum', () => {
   })
 })
 
-describe('ask', () => {
-  test('should return true if guessed', async () => {
+describe('guess', () => {
+  test('should return guessed res if guessed', async () => {
     inquirer.prompt = () => Promise.resolve({userCheckRes: CHECK_RES_TYPE.CORRECT})
-    const res = await ask(50)// 第一次就猜对
-    expect(res).toBe(true)
+    const {isGuessed} = await guess(50, 1, 100)
+    expect(isGuessed).toBe(true)
+    inquirer.prompt = promptPrompt
+  })
+  test('should return not guessed res if not guessed', async () => {
+    inquirer.prompt = () => Promise.resolve({userCheckRes: CHECK_RES_TYPE.SMALL})
+    const {isGuessed} = await guess(90, 1, 100)
+    expect(isGuessed).toBe(false)
+
+    inquirer.prompt = () => Promise.resolve({userCheckRes: CHECK_RES_TYPE.BIG})
+    const {isGuessed: isGuessed2} = await guess(10, 1, 100)
+    expect(isGuessed2).toBe(false)
+
     inquirer.prompt = promptPrompt
   })
 })
@@ -24,6 +43,7 @@ describe('ask', () => {
 describe('genGuessNum', () => {
   test('should return average number', () => {
     expect(genGuessNum(1,5)).toBe(3)
+    expect(genGuessNum(5,1)).toBe(3)
     expect(genGuessNum(1,6)).toBe(3)
   })
 })
