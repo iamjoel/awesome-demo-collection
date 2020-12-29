@@ -57,10 +57,10 @@ const swSrc = paths.swSrc;
 
 // style files regexes
 const cssRegex = /\.css$/;
-const excludeCssModuleRegex = /\.global\.css$/;
+const excludeCssModuleRegex = /\.global\.(css|scss|sass)$/;
 // const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
-const sassModuleRegex = /\.module\.(scss|sass)$/;
+// const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
@@ -483,7 +483,8 @@ module.exports = function (webpackEnv) {
             // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
             // using the extension .module.css
             {
-              test: [excludeCssModuleRegex, /node_modules/],
+              test: sassRegex,
+              exclude: [excludeCssModuleRegex, /node_modules/],
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction
@@ -499,7 +500,7 @@ module.exports = function (webpackEnv) {
             // extensions .module.scss or .module.sass
             {
               test: sassRegex,
-              exclude: sassModuleRegex,
+              exclude: [/node_modules/],
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
@@ -518,7 +519,7 @@ module.exports = function (webpackEnv) {
             // Adds support for CSS Modules, but using SASS
             // using the extension .module.scss or .module.sass
             {
-              test: sassModuleRegex,
+              test: sassRegex,
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
