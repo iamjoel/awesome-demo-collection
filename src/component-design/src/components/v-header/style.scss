@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.divide {
+  margin-right: 8px;
+  width: 1px;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  margin-right: 12px;
+  font-size: 16px;
+  color: #202d40;
+  font-weight: 500;
+}
+
+.show-associate-btn {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  background: url(./icons/add-plus.svg) center no-repeat;
+  background-size: 16px 16px;
+  opacity: 0.5;
+  border-radius: 3px;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    background-color: #f2f4f6;
+  }
+}

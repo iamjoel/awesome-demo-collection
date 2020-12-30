@@ -14,9 +14,9 @@ interface ISubTaskProps {
 interface ISubTaskState {}
 
 class SubTask extends React.Component<ISubTaskProps, ISubTaskState> {
-  constructor (props: ISubTaskProps) {
-    super(props)
-  }
+  // constructor (props: ISubTaskProps) {
+  //   super(props)
+  // }
 
   componentDidMount () {
     this.fetchList()

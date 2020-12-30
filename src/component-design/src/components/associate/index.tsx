@@ -1,4 +1,5 @@
 import React from 'react'
+import VHeader from '../v-header'
 import s from './style.scss'
 
 interface IAssociateProps {
@@ -7,20 +8,39 @@ interface IAssociateProps {
   renderItem: (item: Record<string, any>) => JSX.Element
 }
 
-interface IAssociateState {}
+interface IAssociateState {
+  isShowAssociate: boolean
+}
 
 class Associate extends React.Component<IAssociateProps, IAssociateState> {
+  constructor (props: ISubTaskProps) {
+    super(props)
+    this.state = {
+      isShowAssociate: false
+    }
+  }
+  onShowAssociate = () => {
+    this.setState({
+      isShowAssociate: true
+    })
+  }
+
   render () {
     const { title, list, renderItem } = this.props
 
     return (
       <div>
-        <h3>{title}</h3>
+        <VHeader
+          title={title}
+          onShowAssociate={this.onShowAssociate}
+        />
+        {/* 列表 */}
         <div className={s.list}>
           {list.map(item => {
             return renderItem(item)
           })}
         </div>
+        {/*  */}
       </div>
     )
   }
