@@ -1,7 +1,7 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
-import {isValidNum} from '../utils.js'
-import {MIN, MAX} from '../config.js'
+import { isValidNum } from '../utils.js'
+import { MIN, MAX } from '../config.js'
 
 export const CHECK_RES_TYPE = {
   SMALL: 'small',
@@ -9,12 +9,12 @@ export const CHECK_RES_TYPE = {
   CORRECT: 'correct'
 }
 
-async function main(number) {
-  const targetNum = number || await getNum()
+async function main (number) {
+  const targetNum = number || (await getNum())
   let isGuessed = false
   let min = MIN
   let max = MAX
-  while(!isGuessed) {
+  while (!isGuessed) {
     const res = await guess(targetNum, min, max)
     isGuessed = res.isGuessed
     min = res.min
@@ -23,13 +23,13 @@ async function main(number) {
   return true
 }
 
-export async function getNum() {
-  const {targetNum } = await inquirer.prompt([
+export async function getNum () {
+  const { targetNum } = await inquirer.prompt([
     {
       type: 'input',
       name: 'targetNum',
       message: '输入要猜的数字',
-      validate(value) {
+      validate (value) {
         return isValidNum(value, MIN, MAX)
       }
     }
@@ -37,26 +37,26 @@ export async function getNum() {
   return targetNum
 }
 
-export async function guess(targetNum, min, max) {
+export async function guess (targetNum, min, max) {
   const guessNum = genGuessNum(min, max)
   const expectCheckRes = getExpectCheckRes(guessNum, targetNum)
 
   await checkUserChoose(expectCheckRes, guessNum)
 
-  if(expectCheckRes === CHECK_RES_TYPE.CORRECT) {
+  if (expectCheckRes === CHECK_RES_TYPE.CORRECT) {
     console.log(chalk.green('我猜对喽~'))
-    return {isGuessed: true}
+    return { isGuessed: true }
   } else {
-    if(guessNum > targetNum) {
+    if (guessNum > targetNum) {
       max = guessNum
     } else {
       min = guessNum
     }
-    return {isGuessed: false, min, max}
+    return { isGuessed: false, min, max }
   }
 }
 
-export async function checkUserChoose(expect, guessNum) {
+export async function checkUserChoose (expect, guessNum) {
   const { userCheckRes } = await inquirer.prompt([
     {
       type: 'list',
@@ -78,17 +78,17 @@ export async function checkUserChoose(expect, guessNum) {
       ]
     }
   ])
-  if(userCheckRes !== expect) {
+  if (userCheckRes !== expect) {
     console.log(chalk.red('选错了'))
     await checkUserChoose(expect, guessNum)
   }
   return true
 }
 
-export function getExpectCheckRes(guessNum, targetNum) {
-  if(guessNum > targetNum) {
+export function getExpectCheckRes (guessNum, targetNum) {
+  if (guessNum > targetNum) {
     return CHECK_RES_TYPE.BIG
-  } else if(guessNum < targetNum) {
+  } else if (guessNum < targetNum) {
     return CHECK_RES_TYPE.SMALL
   } else {
     return CHECK_RES_TYPE.CORRECT
@@ -96,10 +96,10 @@ export function getExpectCheckRes(guessNum, targetNum) {
 }
 
 // 用二分法来猜
-export function genGuessNum(min, max) {
+export function genGuessNum (min, max) {
   let guessNum
-  if(max < min) {
-    [min, max] = [max, min]
+  if (max < min) {
+    ;[min, max] = [max, min]
   }
   guessNum = Math.floor((min + max) / 2)
   return guessNum

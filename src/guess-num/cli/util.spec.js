@@ -1,4 +1,4 @@
-import {check, isValidNum} from './utils'
+import { check, isValidNum } from './utils'
 describe('check', () => {
   test('should return big info if input big num', () => {
     const res = check({

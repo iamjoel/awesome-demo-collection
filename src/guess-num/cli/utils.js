@@ -1,6 +1,6 @@
-export function check({targetNum, guessNum, min, max}) {
+export function check ({ targetNum, guessNum, min, max }) {
   const isGuessed = targetNum === guessNum
-  if(isGuessed) {
+  if (isGuessed) {
     return {
       isGuessed
     }
@@ -8,11 +8,11 @@ export function check({targetNum, guessNum, min, max}) {
 
   let msg
   const range = {}
-  if(guessNum > targetNum) {
+  if (guessNum > targetNum) {
     msg = '大了'
     range.min = min
     range.max = guessNum
-  } else  {
+  } else {
     msg = '小了'
     range.min = guessNum
     range.max = max
@@ -24,14 +24,14 @@ export function check({targetNum, guessNum, min, max}) {
   }
 }
 
-export function isValidNum(value, min, max) {
-  if(value === undefined || value === '') {
+export function isValidNum (value, min, max) {
+  if (value === undefined || value === '') {
     return '输入值不能为空'
-  } else if(!/^\d*$/.test(value)) {
+  } else if (!/^\d*$/.test(value)) {
     return '输入值不是合法的整数'
   } else {
     value = parseInt(value, 10)
-    if(value < min || value > max) {
+    if (value < min || value > max) {
       return `输入值必须在 ${min} 和 ${max} 之间`
     }
     return true

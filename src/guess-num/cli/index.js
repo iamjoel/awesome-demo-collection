@@ -9,17 +9,17 @@ const GAME_TYPE = {
 
 main()
 
-async function main() {
+async function main () {
   const type = await chooseGameType()
-  if(type === GAME_TYPE.userGuess) {
+  if (type === GAME_TYPE.userGuess) {
     userGuess()
   } else {
     pcGuess()
   }
 }
 
-async function chooseGameType() {
-  const { type} = await inquirer.prompt([
+async function chooseGameType () {
+  const { type } = await inquirer.prompt([
     {
       type: 'list',
       name: 'type',
@@ -31,7 +31,7 @@ async function chooseGameType() {
         {
           name: '电脑猜，我出数字',
           value: GAME_TYPE.pcGuess
-        },
+        }
       ]
     }
   ])
