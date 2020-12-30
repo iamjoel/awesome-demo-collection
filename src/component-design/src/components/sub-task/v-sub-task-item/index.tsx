@@ -12,9 +12,9 @@ class VSubTaskItem extends React.Component<
   ISubTaskItemProps,
   ISubTaskItemState
 > {
-  constructor (props: ISubTaskItemProps) {
-    super(props)
-  }
+//   constructor (props: ISubTaskItemProps) {
+//     super(props)
+//   }
 
   render () {
     const { id } = this.props

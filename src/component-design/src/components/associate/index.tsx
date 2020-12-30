@@ -4,6 +4,7 @@ import s from './style.scss'
 
 interface IAssociateProps {
   title: string
+  renderHeaderRight?: () => JSX.Element
   list: Record<string, any>[]
   renderItem: (item: Record<string, any>) => JSX.Element
 }
@@ -26,13 +27,14 @@ class Associate extends React.Component<IAssociateProps, IAssociateState> {
   }
 
   render () {
-    const { title, list, renderItem } = this.props
+    const { title, renderHeaderRight, list, renderItem } = this.props
 
     return (
       <div>
         <VHeader
           title={title}
           onShowAssociate={this.onShowAssociate}
+          renderRight={renderHeaderRight}
         />
         {/* 列表 */}
         <div className={s.list}>

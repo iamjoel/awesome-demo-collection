@@ -46,7 +46,16 @@ class SubTask extends React.Component<ISubTaskProps, ISubTaskState> {
     const { list } = this.props
     return (
       <div>
-        <Associate title='子任务' list={list} renderItem={this.renderItem} />
+        <Associate title='子任务' list={list} renderItem={this.renderItem} 
+          renderHeaderRight={this.renderFinishStatus}/>
+      </div>
+    )
+  }
+
+  renderFinishStatus = () => {
+    return (
+      <div>
+        0/3 已完成
       </div>
     )
   }
