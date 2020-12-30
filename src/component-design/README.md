@@ -1,6 +1,5 @@
 # Getting Started with Create React App
 TODO: 
-* 加载不需要拓展名
 * 代码格式化
   
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

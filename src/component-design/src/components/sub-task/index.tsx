@@ -1,7 +1,7 @@
 import React from 'react'
-import Associate from '../associate/index.tsx'
-import VSubTaskItem, { ISubTaskItem } from './v-sub-task-item/index.tsx'
-import { fetchList } from './service.ts'
+import Associate from '../associate'
+import VSubTaskItem, { ISubTaskItem } from './v-sub-task-item'
+import { fetchList } from './service'
 
 interface ISubTaskProps {
   list: ISubTaskItem[],

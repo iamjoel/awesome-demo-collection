@@ -1,4 +1,4 @@
-import { ISubTaskItem } from './v-sub-task-item/index'
+import { ISubTaskItem } from './v-sub-task-item'
 const list:ISubTaskItem[] = [
   {
     id: 1,
