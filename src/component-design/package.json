@@ -78,6 +78,7 @@
     "start": "node scripts/start.js",
     "dev": "PORT=3002 node scripts/start.js",
     "build": "node scripts/build.js",
+    "format": "prettier-standard --format",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -154,5 +155,9 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "prettier-standard": "^16.4.1"
   }
 }

@@ -1,19 +1,16 @@
 import { ISubTaskItem } from './v-sub-task-item'
-const list:ISubTaskItem[] = [
+const list: ISubTaskItem[] = [
   {
-    id: 1,
+    id: 1
   },
   {
-    id: 2,
+    id: 2
   },
   {
-    id: 3,
+    id: 3
   }
 ]
-export const fetchList = 
-  (): Promise<ISubTaskItem[]> => 
-    (
-      new Promise(
-        (resolve: (value: ISubTaskItem[]) => void) => setTimeout(() => resolve(list), 100)
-      )
-    )
+export const fetchList = (): Promise<ISubTaskItem[]> =>
+  new Promise((resolve: (value: ISubTaskItem[]) => void) =>
+    setTimeout(() => resolve(list), 100)
+  )

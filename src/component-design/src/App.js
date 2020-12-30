@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import './App.css';
+import './App.css'
 import SubTask from './components/sub-task'
 
-function App() {
+function App () {
   const [list, setList] = useState([])
   const [isReloadList, setIsReloadList] = useState(false)
   return (
-    <div className="App">
+    <div className='App'>
       <SubTask
         list={list}
         setList={setList}
@@ -15,7 +15,7 @@ function App() {
       />
       <button onClick={() => setIsReloadList(true)}>刷新列表</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
