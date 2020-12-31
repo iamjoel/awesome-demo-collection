@@ -7,4 +7,7 @@ declare module '*.jpeg'
 declare module '*.png'
 declare module '*.svg'
 
-// 第三方库尚未提供声明文件
+// webpack 中配置的别名
+declare module '@/*'
+declare module 'components/*'
+declare module 'dict/*'
