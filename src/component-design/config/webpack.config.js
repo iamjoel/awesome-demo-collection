@@ -324,8 +324,8 @@ module.exports = function (webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
         '@': path.resolve(__dirname, '../src'),
-        'components': path.resolve(__dirname, '../src/components'),
-        'dict': path.resolve(__dirname, '../src/dict'),
+        components: path.resolve(__dirname, '../src/components'),
+        dict: path.resolve(__dirname, '../src/dict'),
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
@@ -486,16 +486,19 @@ module.exports = function (webpackEnv) {
             {
               test: sassRegex,
               exclude: [excludeCssModuleRegex, /node_modules/],
-              use: getStyleLoaders({
-                importLoaders: 1,
-                sourceMap: isEnvProduction
-                  ? shouldUseSourceMap
-                  : isEnvDevelopment,
-                modules: {
-                  getLocalIdent: getCSSModuleLocalIdent,
-                  exportLocalsConvention: 'camelCase'
-                }
-              }, 'sass-loader')
+              use: getStyleLoaders(
+                {
+                  importLoaders: 1,
+                  sourceMap: isEnvProduction
+                    ? shouldUseSourceMap
+                    : isEnvDevelopment,
+                  modules: {
+                    getLocalIdent: getCSSModuleLocalIdent,
+                    exportLocalsConvention: 'camelCase'
+                  }
+                },
+                'sass-loader'
+              )
             },
             {
               test: sassRegex,
@@ -505,7 +508,7 @@ module.exports = function (webpackEnv) {
                   importLoaders: 3,
                   sourceMap: isEnvProduction
                     ? shouldUseSourceMap
-                    : isEnvDevelopment,
+                    : isEnvDevelopment
                 },
                 'sass-loader'
               ),

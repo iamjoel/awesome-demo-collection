@@ -2,14 +2,14 @@ import React from 'react'
 import s from './style.scss'
 
 interface IVHeaderProps {
-  title: string,
+  title: string
   renderRight?: () => JSX.Element
   onShowAssociate: () => void
 }
 
 class VHeader extends React.Component<IVHeaderProps> {
-  render() {
-    const {title, renderRight} = this.props
+  render () {
+    const { title, renderRight } = this.props
     return (
       <div className={s.header}>
         <div className={s.left}>
@@ -17,11 +17,7 @@ class VHeader extends React.Component<IVHeaderProps> {
           <div className={s.divide}></div>
           <div className={s.showAssociateBtn}></div>
         </div>
-        {
-          renderRight && (
-            <div className={s.right}>{renderRight()}</div>
-          )
-        }
+        {renderRight && <div className={s.right}>{renderRight()}</div>}
       </div>
     )
   }

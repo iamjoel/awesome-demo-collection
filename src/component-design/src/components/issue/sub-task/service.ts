@@ -1,5 +1,5 @@
 import { ISubTaskItem } from './v-sub-task-item'
-import {itemStatus} from 'dict/item'
+import { itemStatus } from 'dict/item'
 
 const list: ISubTaskItem[] = [
   {

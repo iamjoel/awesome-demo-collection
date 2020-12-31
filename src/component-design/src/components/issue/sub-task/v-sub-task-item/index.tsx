@@ -1,10 +1,10 @@
 import React from 'react'
 import s from './style.scss'
-import {itemStatus, itemStatusName} from 'dict/item'
+import { itemStatus, itemStatusName } from 'dict/item'
 
 export interface ISubTaskItem {
-  id: number,
-  title: string,
+  id: number
+  title: string
   status: itemStatus
 }
 interface ISubTaskItemProps extends ISubTaskItem {}
@@ -15,9 +15,9 @@ class VSubTaskItem extends React.Component<
   ISubTaskItemProps,
   ISubTaskItemState
 > {
-//   constructor (props: ISubTaskItemProps) {
-//     super(props)
-//   }
+  //   constructor (props: ISubTaskItemProps) {
+  //     super(props)
+  //   }
 
   render () {
     const { id, title, status } = this.props

@@ -3,9 +3,9 @@ import VHeader from '../v-header'
 import s from './style.scss'
 
 interface IAssociateProps {
-  title: string,
-  renderHeaderRight?: () => JSX.Element,
-  list: Record<string, any>[],
+  title: string
+  renderHeaderRight?: () => JSX.Element
+  list: Record<string, any>[]
   renderItem: (item: Record<string, any>) => JSX.Element
 }
 
