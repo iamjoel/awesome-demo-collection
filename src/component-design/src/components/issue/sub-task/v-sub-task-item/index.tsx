@@ -25,7 +25,7 @@ class VSubTaskItem extends React.Component<
       <div className={s.item}>
         <div className={s.left}>
           <div className={s.id}>#{id}</div>
-          <div className={s.id}>{title}</div>
+          <div className={s.title}>{title}</div>
         </div>
         <div className={s.right}>
           <div className={s.status}>{itemStatusName[status]}</div>

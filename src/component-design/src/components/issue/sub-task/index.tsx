@@ -1,11 +1,11 @@
 import React from 'react'
 import Associate from '../associate'
+import withSubTaskService, {IInjectedSubTaskServiceProps} from './with-sub-task-service'
 import VSubTaskItem, { ISubTaskItem } from './v-sub-task-item'
-import { fetchList } from './service'
+
+import s from './style.scss'
 
 interface ISubTaskProps {
-  list: ISubTaskItem[]
-  setList: (list: ISubTaskItem[]) => void
   onLoadList: () => void
   isReloadList?: boolean // 控制刷新列表的
   setIsReloadList?: (isReloadList: boolean) => void
@@ -13,7 +13,8 @@ interface ISubTaskProps {
 
 interface ISubTaskState {}
 
-class SubTask extends React.Component<ISubTaskProps, ISubTaskState> {
+@withSubTaskService
+class SubTask extends React.Component<ISubTaskProps & IInjectedSubTaskServiceProps, ISubTaskState> {
   // constructor (props: ISubTaskProps) {
   //   super(props)
   // }
@@ -36,7 +37,7 @@ class SubTask extends React.Component<ISubTaskProps, ISubTaskState> {
 
   fetchList = async () => {
     console.log('fetchList')
-    const { setList, onLoadList } = this.props
+    const { setList, onLoadList, fetchList } = this.props
     const list = await fetchList()
     setList(list)
     onLoadList && onLoadList()

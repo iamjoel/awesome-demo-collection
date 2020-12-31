@@ -1,11 +1,13 @@
 import React from 'react'
 import VHeader from '../v-header'
+import cn from 'classnames'
 import s from './style.scss'
 
 interface IAssociateProps {
   title: string
   renderHeaderRight?: () => JSX.Element
   list: Record<string, any>[]
+  listClassName?: string
   renderItem: (item: Record<string, any>) => JSX.Element
 }
 
@@ -27,7 +29,7 @@ class Associate extends React.Component<IAssociateProps, IAssociateState> {
   }
 
   render () {
-    const { title, renderHeaderRight, list, renderItem } = this.props
+    const { title, renderHeaderRight, list, listClassName, renderItem } = this.props
 
     return (
       <div>
@@ -37,7 +39,7 @@ class Associate extends React.Component<IAssociateProps, IAssociateState> {
           renderRight={renderHeaderRight}
         />
         {/* 列表 */}
-        <div className={s.list}>
+        <div className={cn(s.list, listClassName && listClassName)}>
           {list.map(item => {
             return renderItem(item)
           })}
