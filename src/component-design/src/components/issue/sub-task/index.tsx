@@ -61,7 +61,7 @@ class SubTask extends React.Component<ISubTaskProps, ISubTaskState> {
   }
 
   renderItem = item => {
-    return <VSubTaskItem key={item.id} id={item.id} />
+    return <VSubTaskItem key={item.id} {...item} />
   }
 }
 

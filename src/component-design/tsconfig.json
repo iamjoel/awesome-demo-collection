@@ -11,7 +11,10 @@
     "skipLibCheck": true,
     "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/**/*.ts", "global.d.ts"],
   "exclude": ["node_modules"]

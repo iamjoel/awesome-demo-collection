@@ -1,71 +1,78 @@
-# Getting Started with Create React App
+# 高质量组件设计的思考
+## 高质量
 
+## 设计方法
+对组件进行分类的目的，是为了更好的复用。
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+组件按职责分类：
+* 容器类组件。
+* 展示类组件。
+* 数据组件。
 
-## Available Scripts
+### 容器组件
+容器组件是把数据的和展示粘合在一起，也就是控制器。容器类组件一般包含：
+* 多个相同子组件。也就是列表组件。
+* 多个不同子组件。
 
-In the project directory, you can run:
+#### 属性的设计
+列表组件属性：
+* itemProps
+* renderItem
 
-### `yarn start`
+itemProps 和 renderItem 二选一。renderItem 的定制性比 itemProps 更高。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+多个不同子组件:
+* includeItems: `string[]`。 包含的组件名称。顺序与数组顺序一致。
+* [item]Props: 某个子组件的属性。
+* render[item]: 渲染子组件。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[item]Props 和 render[item] 二选一。
 
-### `yarn test`
+### 展示组件
+只获取数据来渲染，不改数据。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 数据组件
+数据组件给容器组件上提供数据和操作数据的方法。如：
+```ts
+interface IUserListProps {
+  permission: ...// 权限数据。@withPermission 提供
+  userList: ...// 用户列表数据。@withUserService 提供
+  fetchUserList: ... // 获取用户数据。 @withUserService 提供
+}
 
-### `yarn build`
+@withPermission
+@withUserService
+class UserList extends React.Component(<IUserListProps>) {
+  componentDidMount() {
+    this.props.fetchUserList()
+  }
+ 
+  render() {
+    const {userList} = this.props
+    return (
+      <div>...</div>
+    )
+  }
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 约定 & 规范
+* 展示组件以 V 开头。
+* 方法从字典里拿
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 组件结构
+* App
+  * IssueMain
+    * 描述
+    * 子任务
+      * withPermission, withUserService(数据)
+        * SubTask(容器)
+          * VSubTaskItem
+          * VSubTaskQuickCreate
+          * VSubTaskFullCreate
+          * VSubTaskAssociate
+            * VSearchInput
+            * VSubTaskSearchItem
+            * VNoData
+    * 关联缺陷
+    * 活动日志

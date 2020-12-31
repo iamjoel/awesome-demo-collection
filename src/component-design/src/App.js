@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import SubTask from './components/sub-task'
+import SubTask from './components/issue/sub-task'
 
 function App () {
   const [list, setList] = useState([])
