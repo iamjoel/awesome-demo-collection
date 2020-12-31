@@ -17,6 +17,6 @@
       "dict/*": ["src/dict/*"]
     }
   },
-  "include": ["src/**/*.ts", "global.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "global.d.ts"],
   "exclude": ["node_modules"]
 }
