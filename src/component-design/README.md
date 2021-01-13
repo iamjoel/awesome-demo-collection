@@ -110,3 +110,10 @@ item 只实现外层的ui，左右的给父组件，commonitem 调用 item，sub
             - VNoData
     - 关联缺陷
     - 活动日志
+
+## 列表类组件支持的功能
+* 虚拟列表
+* 脱拽
+* 子项中
+  *  Dropdown 要 Portal 出去
+  *  Dropdown 的数据，要惰性调用接口，即在显示时再接口。
