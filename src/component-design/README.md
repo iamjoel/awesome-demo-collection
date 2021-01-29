@@ -112,7 +112,7 @@ item 只实现外层的ui，左右的给父组件，commonitem 调用 item，sub
     - 活动日志
 
 ## 列表类组件支持的功能
-* 虚拟列表
+* 虚拟列表 - done。
 * 脱拽
 * 子项中
   *  Dropdown 要 Portal 出去

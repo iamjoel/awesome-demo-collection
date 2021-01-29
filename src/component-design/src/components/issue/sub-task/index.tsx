@@ -1,4 +1,6 @@
 import React from 'react'
+import { FixedSizeList } from 'react-window';
+
 import Associate from '../associate'
 import withSubTaskService, {IInjectedSubTaskServiceProps} from './with-sub-task-service'
 import VSubTaskItem, { ISubTaskItem } from './v-sub-task-item'
@@ -61,8 +63,8 @@ class SubTask extends React.Component<ISubTaskProps & IInjectedSubTaskServicePro
     return <div>0/3 已完成</div>
   }
 
-  renderItem = item => {
-    return <VSubTaskItem key={item.id} {...item} />
+  renderItem = (item, style) => {
+    return <VSubTaskItem key={item.id} {...item} style={style} />
   }
 }
 

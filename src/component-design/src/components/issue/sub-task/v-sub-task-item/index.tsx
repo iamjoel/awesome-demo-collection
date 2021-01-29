@@ -5,7 +5,8 @@ import { itemStatus, itemStatusName } from 'dict/item'
 export interface ISubTaskItem {
   id: number
   title: string
-  status: itemStatus
+  status: itemStatus,
+  style?: React.CSSProperties;
 }
 interface ISubTaskItemProps extends ISubTaskItem {}
 
@@ -20,9 +21,9 @@ class VSubTaskItem extends React.Component<
   //   }
 
   render () {
-    const { id, title, status } = this.props
+    const { id, title, status, style } = this.props
     return (
-      <div className={s.item}>
+      <div className={s.item} style={style ? style : {}}>
         <div className={s.left}>
           <div className={s.id}>#{id}</div>
           <div className={s.title}>{title}</div>

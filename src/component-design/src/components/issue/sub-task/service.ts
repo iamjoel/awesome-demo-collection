@@ -1,23 +1,15 @@
 import { ISubTaskItem } from './v-sub-task-item'
 import { itemStatus } from 'dict/item'
 
-const list: ISubTaskItem[] = [
-  {
-    id: 1,
-    title: '任务1',
+const list: ISubTaskItem[] = []
+
+for (let i = 1; i < 21; i++) {
+  list.push({
+    id: i,
+    title: `任务${i}`,
     status: itemStatus.NOT_START
-  },
-  {
-    id: 2,
-    title: '任务2',
-    status: itemStatus.NOT_START
-  },
-  {
-    id: 3,
-    title: '任务3',
-    status: itemStatus.NOT_START
-  }
-]
+  })
+}
 export const fetchList = (): Promise<ISubTaskItem[]> =>
   new Promise((resolve: (value: ISubTaskItem[]) => void) =>
     setTimeout(() => resolve(list), 100)
