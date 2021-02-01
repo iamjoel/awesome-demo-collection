@@ -1,16 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-import SubTask from './components/issue/sub-task'
+import s from './App.scss'
+import IRequirementDetail from '@/components/issue/type/requirement/detail'
 
 function App () {
-  const [isReloadList, setIsReloadList] = useState(false)
   return (
-    <div className='App'>
-      <div className="section">
-        <SubTask
-          isReloadList={isReloadList}
-          setIsReloadList={setIsReloadList}
-        />
+    <div className={s.App}>
+      <div className={s.section}>
+        <div className={s.item}>
+          <h2>需求</h2>
+          <IRequirementDetail />
+        </div>
       </div>
     </div>
   )

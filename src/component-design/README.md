@@ -111,6 +111,36 @@ item 只实现外层的ui，左右的给父组件，commonitem 调用 item，sub
     - 关联缺陷
     - 活动日志
 
+## 具体场景
+对于容器类组件中的数据，有些从接口拿数据，为了灵活性，控制器内部去获取，也会从
+```js
+<XXList
+  list={} // 可选。初始化从接口获取的数据
+  fetchList={} // 可选。内部有
+  onLoaded={}
+
+>
+</XXList>
+```
+
+## 属性的分类
+1 和外部的数据的交互
+* fetchList, fetchDetail, updateItem, deleteItem
+* list, data ...
+
+2 主动调用子组件
+* ref
+* controlFocus...
+
+3 子组件通知父组件 & 改组件的值
+* onClick, onChange, onLoad, onError ...
+* setList ...
+
+4 控制部分子组件的 UI & 特性
+* renderHeader, renderItem ...
+* className, style
+* readOnly, disabled,
+
 ## 列表类组件支持的功能
 * 虚拟列表 - done。
 * 脱拽

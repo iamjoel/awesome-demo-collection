@@ -1,5 +1,5 @@
 import React from 'react'
-import { FixedSizeList } from 'react-window';
+import { FixedSizeList } from 'react-window'
 import VHeader from '../v-header'
 import cn from 'classnames'
 import s from './style.scss'
@@ -9,7 +9,7 @@ interface IAssociateProps {
   renderHeaderRight?: () => JSX.Element
   list: Record<string, any>[]
   listClassName?: string
-  renderItem: (item: Record<string, any>) => JSX.Element
+  renderItem: (item: Record<string, any>, style: React.CSSProperties) => JSX.Element
 }
 
 interface IAssociateState {
@@ -18,7 +18,7 @@ interface IAssociateState {
 
 const ITEM_HEIGHT = 36
 class Associate extends React.Component<IAssociateProps, IAssociateState> {
-  constructor (props: ISubTaskProps) {
+  constructor (props: IAssociateProps) {
     super(props)
     this.state = {
       isShowAssociate: false
@@ -33,12 +33,12 @@ class Associate extends React.Component<IAssociateProps, IAssociateState> {
   
   getListHeight = (len: number) => Math.min(345, ITEM_HEIGHT * len);
 
-  renderItem = ({index, style, data: {list}}) => {
+  renderItem = ({index, style, data: {list}}: {index: number, style: React.CSSProperties, data: {list: any[]}}) => {
     return this.props.renderItem(list[index], style)
   }
 
   render () {
-    const { title, renderHeaderRight, list, listClassName, renderItem } = this.props
+    const { title, renderHeaderRight, list, listClassName } = this.props
 
     return (
       <div>
@@ -49,10 +49,12 @@ class Associate extends React.Component<IAssociateProps, IAssociateState> {
         />
         {/* 列表 */}
         <div className={cn(s.list, listClassName && listClassName)}>
+          {/* //tslint:disable-next-line */}
           <FixedSizeList
             itemCount={list.length}
             itemSize={ITEM_HEIGHT}
             height={this.getListHeight(list.length)}
+            width={300}
             itemData={{
               list
             }}

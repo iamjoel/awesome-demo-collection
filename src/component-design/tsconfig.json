@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "module": "esnext",
     "target": "es5",
     "allowJs": true,
@@ -14,8 +15,8 @@
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "paths": {
-      "@/*": ["src/*"],
-      "dict/*": ["src/dict/*"]
+      "@/*": ["./src/*"],
+      "dict/*": ["./src/dict/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "global.d.ts"],

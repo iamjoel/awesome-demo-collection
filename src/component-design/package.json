@@ -60,6 +60,7 @@
     "react-dev-utils": "^11.0.1",
     "react-dom": "^17.0.1",
     "react-refresh": "^0.8.3",
+    "react-virtualized-auto-sizer": "^1.0.4",
     "react-window": "^1.8.6",
     "resolve": "1.18.1",
     "resolve-url-loader": "^3.1.2",
@@ -168,6 +169,9 @@
     ]
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/react-virtualized-auto-sizer": "^1.0.0",
+    "@types/react-window": "^1.8.2",
     "prettier": "^2.2.1",
     "prettier-standard": "^16.4.1"
   }

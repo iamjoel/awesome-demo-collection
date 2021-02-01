@@ -1,21 +1,17 @@
 import React from 'react'
-import { FixedSizeList } from 'react-window';
 
 import Associate from '../associate'
 import withSubTaskService, {IInjectedSubTaskServiceProps} from './with-sub-task-service'
-import VSubTaskItem, { ISubTaskItem } from './v-sub-task-item'
+import VSubTaskItem, {ISubTaskItem} from './v-sub-task-item'
 
-import s from './style.scss'
-
+// import s from './style.scss'
 interface ISubTaskProps {
-  onLoadList: () => void
-  isReloadList?: boolean // 控制刷新列表的
-  setIsReloadList?: (isReloadList: boolean) => void
+  onLoad?: () => void
+  controlReload?: number // 控制刷新列表的
 }
 
 interface ISubTaskState {}
 
-@withSubTaskService
 class SubTask extends React.Component<ISubTaskProps & IInjectedSubTaskServiceProps, ISubTaskState> {
   // constructor (props: ISubTaskProps) {
   //   super(props)
@@ -25,24 +21,18 @@ class SubTask extends React.Component<ISubTaskProps & IInjectedSubTaskServicePro
     this.fetchList()
   }
 
-  componentDidUpdate (prevProps) {
-    const { isReloadList, setIsReloadList } = this.props
-    if (isReloadList && isReloadList !== prevProps.isReloadList) {
+  componentDidUpdate (prevProps: ISubTaskProps & IInjectedSubTaskServiceProps) {
+    const { controlReload } = this.props
+    if (controlReload  !== prevProps.controlReload) {
       this.fetchList()
-      if (setIsReloadList) {
-        setIsReloadList(false)
-      } else {
-        console.error('setIsReloadList is required!')
-      }
     }
   }
 
   fetchList = async () => {
-    console.log('fetchList')
-    const { setList, onLoadList, fetchList } = this.props
+    const { setList, onLoad, fetchList } = this.props
     const list = await fetchList()
     setList(list)
-    onLoadList && onLoadList()
+    onLoad && onLoad()
   }
 
   render () {
@@ -50,7 +40,7 @@ class SubTask extends React.Component<ISubTaskProps & IInjectedSubTaskServicePro
     return (
       <div>
         <Associate
-          title='子任务'
+          title="子任务"
           list={list}
           renderItem={this.renderItem}
           renderHeaderRight={this.renderFinishStatus}
@@ -63,9 +53,9 @@ class SubTask extends React.Component<ISubTaskProps & IInjectedSubTaskServicePro
     return <div>0/3 已完成</div>
   }
 
-  renderItem = (item, style) => {
-    return <VSubTaskItem key={item.id} {...item} style={style} />
+  renderItem = (item: Record<string, any>, style: React.CSSProperties) => {
+    return <VSubTaskItem key={item.id} {...item as ISubTaskItem} style={style} />
   }
 }
 
-export default SubTask
+export default withSubTaskService(SubTask)

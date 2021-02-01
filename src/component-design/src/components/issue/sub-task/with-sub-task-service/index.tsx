@@ -1,6 +1,6 @@
 import React from 'react'
 import { Subtract } from 'utility-types';
-import VSubTaskItem, { ISubTaskItem } from '../v-sub-task-item'
+import { ISubTaskItem } from '../v-sub-task-item'
 import { fetchList } from '../service'
 
 export interface IInjectedSubTaskServiceProps {
@@ -30,10 +30,10 @@ const withSubTaskService = <P extends IInjectedSubTaskServiceProps>(Component: R
       const { list } = this.state
       return (
         <Component
+          {...props as P}
           list={list}
           setList={this.setList}
           fetchList={fetchList}
-          {...props as P}
         />
       )
     }
