@@ -14,12 +14,12 @@ module.exports = function (plop) {
         }
       ],
       actions: data => {
-        const folder = data.isContainer === 'y' ? 'container' : 'issue'
+        const folder = data.isContainer === 'y' ? 'containers' : 'components'
         const componentName = toComponentName(data.name)
         const actions = [
           {
             type: 'add',
-            path: `src/components/${folder}/{{name}}/index.tsx`,
+            path: `src/${folder}/{{name}}/index.tsx`,
             templateFile: 'plop-templates/component.hbs',
             data: {
               componentName

@@ -94,22 +94,49 @@ item 只实现外层的ui，左右的给父组件，commonitem 调用 item，sub
 - 方法从字典里拿
 
 ## 组件结构
-
-- App
-  - IssueMain
+- RequirementDetail, AssignmentDetail, DefectDetail
+  - 左侧 Main。 
+    - 头部按钮
     - 描述
     - 子任务
-      - withPermission, withUserService(数据)
-        - SubTask(容器)
-          - VSubTaskItem
-          - VSubTaskQuickCreate
-          - VSubTaskFullCreate
-          - VSubTaskAssociate
-            - VSearchInput
-            - VSubTaskSearchItem
-            - VNoData
+      - withPermission
+        - SubTask
+          - Header 头
+          - SubTaskList 列表
+            - SubTaskItem
+              - ItemStatus
+                - Dropdown
+                  - PortalToFollowElem
+          - SubTaskQuickCreate 快速创建
+            - QuickCreate
+              - Input
+                - ConfirmButton
+                - CancelButton
+          - SubTaskFullCreate 完成创建
+            - FullCreate
+              - Dialog
+                - ConfirmButton
+                - CancelButton
+          - SubTaskAssociate 关联已有
+            - Associate
+              - SearchInput
+              - Dropdown
+                - SubTaskSearchItem
+              - NoData
     - 关联缺陷
     - 活动日志
+  - 右侧 Slide
+
+## 文件结构
+- src
+  - components 项目通用组件。不带业务逻辑。
+  - container 页面 & 页面通用组件
+    - main
+      - 页面组件1
+        - components 页面专用组件
+      - ...
+    - components 页面通用组件
+    - assets
 
 ## 具体场景
 对于容器类组件中的数据，有些从接口拿数据，为了灵活性，控制器内部去获取，也会从
