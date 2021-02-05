@@ -1,5 +1,4 @@
 module.exports = function (plop) {
-  // create your generators here
   plop.setGenerator('component', {
       description: 'creat component',
       prompts: [
@@ -16,19 +15,30 @@ module.exports = function (plop) {
       ],
       actions: data => {
         const folder = data.isContainer === 'y' ? 'container' : 'issue'
+        const componentName = toComponentName(data.name)
         const actions = [
           {
             type: 'add',
             path: `src/components/${folder}/{{name}}/index.tsx`,
-            templateFile: 'plop-templates/component.hbs'
+            templateFile: 'plop-templates/component.hbs',
+            data: {
+              componentName
+            },
+            skipIfExists: true
           },
           {
             type: 'add',
             path: `src/components/${folder}/{{name}}/style.scss`,
-            templateFile: 'plop-templates/style.hbs'
+            templateFile: 'plop-templates/style.hbs',
+            skipIfExists: true
           }
         ]
         return actions
       }
   });
+}
+
+function toComponentName(name) {
+  let nameArray = name.split('-')
+  return nameArray.map(item => `${item.charAt(0).toUpperCase()}${item.substr(1)}`).join('')
 }
