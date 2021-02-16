@@ -104,9 +104,10 @@ item 只实现外层的ui，左右的给父组件，commonitem 调用 item，sub
           - Header 头
           - SubTaskList 列表
             - SubTaskItem
-              - ItemStatus
-                - Dropdown
-                  - PortalToFollowElem
+              - RowItem
+                - ItemStatus
+                  - Dropdown
+                    - PortalToFollowElem
           - SubTaskQuickCreate 快速创建
             - QuickCreate
               - Input
@@ -128,16 +129,15 @@ item 只实现外层的ui，左右的给父组件，commonitem 调用 item，sub
   - 右侧 Slide
 
 ## 文件结构
-- src
-  - components 项目通用组件。不带业务逻辑。
-  - container 页面 & 页面通用组件
-    - main
-      - 页面组件1
-        - components 页面专用组件
-      - ...
-    - components 页面通用组件
-    - assets
+就近原则。关联性近的放一起
 
+- src
+  - components 组件。
+    - base 与业务无关的
+    - business 与业务相关的 
+  - views 页面
+  - assets 公共资源
+ 
 ## 具体场景
 对于容器类组件中的数据，有些从接口拿数据，为了灵活性，控制器内部去获取，也会从
 ```js
